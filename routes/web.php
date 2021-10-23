@@ -15,5 +15,5 @@ use App\Http\Controllers\ApiController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('ventas');
 });

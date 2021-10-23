@@ -25,6 +25,6 @@ class Sale extends Model
     }
     public function detail()
     {
-      return $this->hasMany(Detail::class, 'dateil_sale', 'sale_id');
+      return $this->hasMany(Detail::class, 'detail_sale', 'sale_id');
     }
 }

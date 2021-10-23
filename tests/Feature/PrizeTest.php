@@ -27,6 +27,6 @@ class PrizeTest extends TestCase
           $response
               ->assertStatus(200)
               ->assertJson(['success' => true]);
-        $this->assertDatabaseHas('prizes', $data);
-    }*/
+        $this->assertDatabaseHas('prizes', $data);*/
+    }
 }

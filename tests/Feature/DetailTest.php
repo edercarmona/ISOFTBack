@@ -15,16 +15,16 @@ class DetailTest extends TestCase
      */
     public function test_example()
     {
-      /*$data = [
+      $data = [
            'detail_sale' => 1,
-           'detail_group' => 'MG',
-           'detail_product' => 1,
-           'detail_quantity' => 35,
+           'detail_group' => 'MU',
+           'detail_product' => 4,
+           'detail_quantity' => 1,
          ];
          $response = $this->post('/api/detail',$data);
          $response
              ->assertStatus(200)
              ->assertJson(['success' => true]);
-       $this->assertDatabaseHas('details', $data);*/
+       $this->assertDatabaseHas('details', $data);
     }
 }
