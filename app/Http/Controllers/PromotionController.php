@@ -77,9 +77,28 @@ class PromotionController extends Controller
      * @param  \App\Models\Promotion  $promotion
      * @return \Illuminate\Http\Response
      */
-    public function show(Promotion $promotion)
+    public function show()
     {
-        //
+          $now = date('Y-m-d');
+          $promotion=Promotion::where('promotion_active', 1)
+          ->where('promotion_startdate','<=', $now)
+          ->where('promotion_enddate','>=', $now)
+          ->with(['prize' => function($query){
+                $query->where('prize_active', 1)
+                ->where('prize_stock', '>' ,0);
+          }])
+          ->with(['rule' => function($query){
+                  $query->where('rule_active', 1);
+            }])
+          ->get();
+          if (!$promotion) {
+              return response()->json([
+                  'success' => false,
+                  'message' => 'No existen promociones vigentes'
+              ], 400);
+          }
+
+          return $promotion;
     }
 
     /**

@@ -27,4 +27,9 @@ class Sale extends Model
     {
       return $this->hasMany(Detail::class, 'detail_sale', 'sale_id');
     }
+
+    public function ticket()
+    {
+      return $this->hasMany(Ticket::class, 'ticket_promotion', 'sale_id');
+    }
 }

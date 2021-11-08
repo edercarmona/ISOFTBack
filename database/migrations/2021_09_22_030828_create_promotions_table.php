@@ -17,6 +17,7 @@ class CreatePromotionsTable extends Migration
             $table->increments('promotion_id');
             $table->string('promotion_name',100)->nullable($value = false);
             $table->string('promotion_description',255)->nullable($value = false);
+            $table->string('promotion_image',255)->nullable($value = false);
             $table->date('promotion_stardate')->nullable($value = false);
             $table->date('promotion_enddate')->nullable($value = false);
             $table->boolean('promotion_active')->default(1);

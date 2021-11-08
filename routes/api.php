@@ -16,6 +16,8 @@ use App\Http\Controllers\DetailController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\PrizeController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\PointController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +57,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [ApiController::class, 'logout']);
     Route::get('get_user', [ApiController::class, 'get_user']);
     Route::get('show_user', [ApiController::class, 'show']);
+    Route::post('update_user', [ApiController::class, 'update']);
+    Route::get('get_promotion', [PromotionController::class, 'show']);
+    Route::post('ticket', [TicketController::class, 'store']);
+    Route::get('point', [PointController::class, 'show']);
 });

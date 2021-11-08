@@ -21,6 +21,7 @@ class CreatePrizesTable extends Migration
           $table->boolean('prize_active')->default(1);
           $table->integer('prize_stock')->nullable($value = false);
           $table->string('prize_description',255)->nullable($value = false);
+          $table->string('prize_image',255)->nullable($value = false);
           $table->timestamps();
           $table->foreign('prize_promotion')->references('promotion_id')->on('promotions');
         });

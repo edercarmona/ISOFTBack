@@ -120,14 +120,45 @@ class ApiController extends Controller
 
     public function show(Request $request)
     {
-      $product=User::where('user_email', $request->user_email)->first();
-       if (!$product) {
+      $user=User::where('user_email', $request->user_email)->first();
+       if (!$user) {
            return response()->json([
                'success' => false,
                'message' => 'Usuario no Encontrado'
            ], 400);
        }
 
-       return $product;
+       return $user;
+    }
+    public function update(Request $request)
+    {
+    	//Validando Datos
+        $data = $request->only('user_name', 'user_email', 'user_password', 'user_phone', 'user_dire');
+        $validator = Validator::make($data, [
+            'user_name' => 'required|string',
+            'user_email' => 'required|email',
+            'user_password' => 'string|min:6|max:50',
+            'user_phone' => 'required|string|min:10|max:10',
+            'user_dire' => 'required|string|min:6|max:250'
+        ]);
+
+        //enviando mensaje si la validacion falla
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->messages()], 200);
+        }
+
+        //si pasa la validacion se actualiza  el usuario
+        User::where('user_email', $request->user_email)
+          ->update(['user_name' => $request->user_name,
+        	         'user_password' => bcrypt($request->user_password),
+                  'user_phone' => $request->user_phone,
+                  'user_dire' => $request->user_dire,]);
+
+        //Usuaro creado, se envia respuesta
+        return response()->json([
+            'success' => true,
+            'message' => 'User updated successfully',
+            'data' => $data
+        ], Response::HTTP_OK);
     }
 }
