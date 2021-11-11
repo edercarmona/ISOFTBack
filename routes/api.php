@@ -54,6 +54,7 @@ Route::post('promotion', [PromotionController::class, 'store']);
 Route::post('rule', [RuleController::class, 'store']);
 Route::post('prize', [PrizeController::class, 'store']);
 Route::post('win', [WinController::class, 'store']);
+Route::post('finish', [WinController::class, 'store2']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [ApiController::class, 'logout']);

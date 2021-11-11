@@ -83,7 +83,7 @@ class WinController extends Controller
 
               return response()->json([
                   'success' => true,
-                  'message' => 'Ticket registrtado con exito!!! ',
+                  'message' => 'premios  asigandos con exito!!! ',
                   'data' => $win
               ], Response::HTTP_OK);
             }
@@ -92,8 +92,17 @@ class WinController extends Controller
       }
     }
 
-    public function store2()
+    public function store2(Request $request)
     {
+
+      $data = $request->only('user_email');
+      $validator = Validator::make($data, [
+          'user_email' => 'required|email',
+      ]);
+      //enviando mensaje si la validacion falla
+      if ($validator->fails()) {
+          return response()->json(['error' => $validator->messages()], 200);
+      }
       $now = date('Y-m-d');
       $promotion=Promotion::where('promotion_active', 1)
       ->where('promotion_startdate','<=', $now)
@@ -105,44 +114,17 @@ class WinController extends Controller
               'message' => 'No existen promociones vigentes'
           ], 400);
       }else{
-        $points=Point::where('point_promotion', $promotion[0]['promotion_id'])
-        ->where('point_status', 1)
-        ->get();
-         foreach($points as $values)
-         {
-              $prize=Prize::where('prize_points', '<=' ,$values->point_cant)
-                ->orderBy('prize_points', 'desc')
-                ->first();
-                if (!$prize) {
-                  Point::where('point_user', $values->point_user)
-                        ->where('point_promotion',  $promotion[0]['promotion_id'])
-                        ->update(['point_status' => 0]);
-                  return response()->json([
-                      'success' => false,
-                      'message' => 'Puntos insuficientes'
-                  ], 400);
-                }else{
-              echo $prize->prize_description. "\n";
-              $win = Win::create([
-                'win_promotion' =>  $promotion[0]['promotion_id'],
-                'win_user' =>$values->point_user,
-                'win_prize' => $prize->prize_id,
-                'win_status' => 1,
-              ]);
-              Point::where('point_user', $values->point_user)
-                    ->where('point_promotion',  $promotion[0]['promotion_id'])
-                    ->update(['point_status' => 0]);
+      Win::where('win_user', $request->user_email)
+            ->update(['win_status' => 1]);
 
               return response()->json([
                   'success' => true,
-                  'message' => 'Ticket registrtado con exito!!! ',
-                  'data' => $win
+                  'message' => 'Premios Canjeados con exito!!! ',
+                  'data' => $data
               ], Response::HTTP_OK);
             }
-         }
       //  return $points;
       }
-    }
 
     /**
      * Display the specified resource.
