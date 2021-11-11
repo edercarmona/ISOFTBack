@@ -37,5 +37,13 @@ class User extends Authenticatable implements JWTSubject
     {
       return $this->hasMany(Point::class, 'point_user', 'user_email');
     }
+    public function win()
+    {
+      return $this->hasMany(Win::class, 'win_user', 'user_email');
+    }
+    public function taxe()
+    {
+      return $this->hasMany(Taxe::class, 'taxe_user', 'user_email');
+    }
 
 }

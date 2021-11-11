@@ -18,6 +18,8 @@ use App\Http\Controllers\RuleController;
 use App\Http\Controllers\PrizeController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\PointController;
+use App\Http\Controllers\WinController;
+use App\Http\Controllers\TaxeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +53,7 @@ Route::get('detail/{sale}', [DetailController::class, 'show']);
 Route::post('promotion', [PromotionController::class, 'store']);
 Route::post('rule', [RuleController::class, 'store']);
 Route::post('prize', [PrizeController::class, 'store']);
-
+Route::post('win', [WinController::class, 'store']);
 
 Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('logout', [ApiController::class, 'logout']);
@@ -61,4 +63,8 @@ Route::group(['middleware' => ['jwt.verify']], function() {
     Route::get('get_promotion', [PromotionController::class, 'show']);
     Route::post('ticket', [TicketController::class, 'store']);
     Route::get('point', [PointController::class, 'show']);
+    Route::get('win', [WinController::class, 'show']);
+    Route::post('taxes', [TaxeController::class, 'store']);
+    Route::get('get_taxes', [TaxeController::class, 'show']);
+    Route::post('update_taxes', [TaxeController::class, 'update']);
 });

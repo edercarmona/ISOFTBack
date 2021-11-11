@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prize;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,9 +75,10 @@ class PrizeController extends Controller
      * @param  \App\Models\Prize  $prize
      * @return \Illuminate\Http\Response
      */
-    public function show(Prize $prize)
+    public function show(Request $request)
     {
-        //
+      
+
     }
 
     /**

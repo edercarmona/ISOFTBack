@@ -44,7 +44,7 @@ class TicketController extends Controller
         $now=date('Y-m-d');
         $data = $request->only('ticket_id','user_email');
         $validator = Validator::make($data, [
-            'ticket_id' => ['required','string','unique:tickets'],
+            'ticket_id' => ['required','string','unique:tickets','min:36','max:36'],
         ]);
         $station= substr($request->ticket_id, 0, 2);
         $pump= substr($request->ticket_id, 2, 2);
@@ -101,6 +101,7 @@ class TicketController extends Controller
 
         $point=Point::where('point_promotion', $promotion[0]['promotion_id'])
         ->where('point_user', $request->user_email)
+        ->where('point_status', 1)
         ->get();
 
         if (count($point)==0) {

@@ -16,4 +16,9 @@ class Prize extends Model
     {
       return $this->belongsTo(Promotion::class, 'prize_promotion', 'promotion_id');
     }
+
+    public function win()
+    {
+      return $this->hasMany(Win::class, 'win_promotion', 'prize_id');
+    }
 }

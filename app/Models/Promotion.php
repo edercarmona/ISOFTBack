@@ -29,4 +29,8 @@ class Promotion extends Model
     {
       return $this->hasMany(Point::class, 'point_promotion', 'promotion_id');
     }
+    public function win()
+    {
+      return $this->hasMany(Win::class, 'win_promotion', 'promotion_id');
+    }
 }

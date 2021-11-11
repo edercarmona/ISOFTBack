@@ -15,10 +15,11 @@ class SaleTest extends TestCase
      */
     public function test_example()
     {
-      /*$data = [
-           'sale_station' => 4,
-           'sale_pump' => 4,
-           'sale_operator' => 12525,
+      /*
+      $data = [
+           'sale_station' => 1,
+           'sale_pump' => 1,
+           'sale_operator' => 33456,
          ];
          $response = $this->post('/api/sale',$data);
          $response

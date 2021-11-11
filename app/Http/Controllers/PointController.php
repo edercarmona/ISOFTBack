@@ -72,7 +72,7 @@ class PointController extends Controller
             ->orderBy('prize_points', 'desc')
             ->first();
           if (!$prize) {
-            $win= "Aun no haz ganado";
+            $win= "Aun no tienes suficientes puntos";
           }else{
               $win= $prize->prize_description;
           }
